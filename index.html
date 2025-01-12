@@ -4,6 +4,119 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eid Mubarak 1445H</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/output.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
+          "control": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/controls/OrbitControls.js",
+          "loader": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/loaders/GLTFLoader.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
+        }
+      }
+    </script>
   </head>
-  <body></body>
+  <body class="bg-green-100 font-poppins">
+    <div class="flex flex-wrap items-center justify-center ml-56 relative">
+      <div class="container max-w-4xl bg-white rounded shadow-xl m-12">
+        <div class="h-96 overflow-hidden rounded-t">
+          <img
+            class="w-full rounded -mt-5"
+            src="img/1.jpg"
+            alt="Photo by Ruwaifi on Vecteezy"
+          />
+        </div>
+        <div class="flex justify-center px-5 -mt-24 mb-5">
+          <span class="block h-44 w-44">
+            <img
+              class="mx-auto object-cover rounded-full bg-white p-1.5 shadow-xl"
+              src="img/2.jpg"
+              alt="Randi Febriadi"
+            />
+          </span>
+        </div>
+        <div class="px-7 mb-8">
+          <h1
+            class="text-8xl font-bold text-green-800 text-center font-almarai"
+          >
+            عيد مبارك
+          </h1>
+          <h2 class="text-5xl mt-8 font-bold text-green-800 text-center">
+            Eid Mubarak
+          </h2>
+          <p class="text-slate-500 text-2xl text-center italic mt-10">
+            May Allah bring us joy, health, happiness, peace and prosperity on
+            this blessed day.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box absolute -z-10 top-20 -left-40"></div>
+
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "control";
+      import { GLTFLoader } from "loader";
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const box = document.querySelector(".box");
+      box.appendChild(renderer.domElement);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enable = false;
+
+      //   const geometry = new THREE.BoxGeometry(1, 1, 1);
+      //   //   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+      //   const material = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+      //   const cube = new THREE.Mesh(geometry, material);
+      //   scene.add(cube);
+
+      camera.position.z = 5;
+      camera.position.x = 4;
+      camera.position.y = -0.5;
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 12); // soft white light
+      scene.add(ambientLight);
+
+      const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+      pointLight.position.set(50, 50, 50);
+      scene.add(pointLight);
+
+      const loader = new GLTFLoader();
+      let ketupat;
+
+      loader.load("ketupat/scene.gltf", function (gltf) {
+        ketupat = gltf.scene;
+        ketupat.scale.set(30, 30, 30);
+        ketupat.rotation.z = 0.3;
+        scene.add(ketupat);
+      });
+
+      function animate() {
+        ketupat.rotation.y += 0.01;
+
+        // cube.rotation.x += 0.01;
+        // cube.rotation.y += 0.01;
+        // cube.rotation.z += 0.01;
+        renderer.render(scene, camera);
+      }
+      renderer.setAnimationLoop(animate);
+    </script>
+  </body>
 </html>

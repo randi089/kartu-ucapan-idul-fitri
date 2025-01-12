@@ -1,0 +1,16 @@
+{
+  "name": "kartu-ucapan-idul-fitri-three-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "twc": "npx tailwindcss -i ./src/input.css -o ./css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
